@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { usuarios } from '../../interface/user.interface';
+import { WebSocketsService } from '../../services/web-sockets.service';
+import { Router } from '@angular/router';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -15,17 +18,35 @@ export class LoginComponent implements OnInit {
   };
   accion: boolean = true;
 
-  constructor() {}
+  constructor(
+    public webSocket: WebSocketsService,
+    private router: Router,
+    private userService: UsuarioService
+  ) {}
 
   ngOnInit(): void {}
 
-  ingresar() {}
+  async ingresar() {
+    await this.userService
+      .loginUser(this.user.mail!, this.user.password!)
+      .then((resolve) => {
+        console.log(resolve);
+        this.router.navigateByUrl('/panel-control-holters');
+      });
+  }
 
   goToRegister() {
     this.accion = false;
   }
 
-  registrar() {}
+  async registrar() {
+    await this.userService
+      .register(this.user.name!, this.user.mail!, this.user.password!)
+      .then((resolve) => {
+        console.log(resolve);
+        this.accion = true;
+      });
+  }
 
   goToLogin() {
     this.accion = true;
