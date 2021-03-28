@@ -1,0 +1,162 @@
+<div class="row">
+  <div class="col-md-5 mx-auto">
+    <div *ngIf="accion; else registroFrom">
+      <div class="myform form">
+        <div class="logo mb-3">
+          <div class="col-md-12 text-center">
+            <h1>Login</h1>
+          </div>
+        </div>
+        <form (ngSubmit)="ingresar()">
+          <div class="form-group">
+            <label for="InputEmail">Correo electronico:</label>
+            <input
+              type="text"
+              id="InputEmail"
+              [(ngModel)]="user.mail"
+              name="mail"
+              class="form-control"
+              placeholder="Correo."
+              autofocus
+            />
+          </div>
+          <div class="form-group">
+            <label for="PaswworInput">Contraseña:</label>
+            <input
+              type="password"
+              id="PaswworInput"
+              [(ngModel)]="user.password"
+              name="password"
+              class="form-control"
+              placeholder="Contraseña."
+              autofocus
+            />
+          </div>
+
+          <div class="col-md-12 text-center">
+            <button
+              [disabled]="
+                user.password!.trim().length === 0 &&
+                user.mail!.trim().length === 0
+              "
+              class="btn btn-block mybtn btn-primary tx-tfm"
+            >
+              Ingresar
+            </button>
+          </div>
+
+          <div class="col-md-12">
+            <div class="login-or">
+              <hr class="hr-or" />
+              <span class="span-or">o</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <p class="text-center">
+              No tiene una cuenta?
+              <a href="#" (click)="goToRegister()">Registrese aca.</a>
+            </p>
+          </div>
+
+          <div class="form-group">
+            <div class="corazon"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <ng-template #registroFrom>
+      <div class="myform form">
+        <div class="logo mb-3">
+          <div class="col-md-12 text-center">
+            <h1>Registrarse</h1>
+          </div>
+        </div>
+        <form (ngSubmit)="registrar()" autocomplete="off">
+          <div class="form-group">
+            <label for="InputEmailR">Correo electronico:</label>
+            <input
+              type="text"
+              id="InputEmailR"
+              [(ngModel)]="user.mail"
+              name="mailR"
+              class="form-control"
+              placeholder="Ingrese el Correo electronico"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="InputName">Nombre de usuario:</label>
+            <input
+              type="text"
+              id="InputName"
+              [(ngModel)]="user.name"
+              name="nameR"
+              class="form-control"
+              placeholder="Ingrese su nombre de usaurio."
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="InputPass">Contraseña:</label>
+            <input
+              type="password"
+              id="InputPass"
+              [(ngModel)]="user.password"
+              name="passwordR"
+              class="form-control"
+              placeholder="Ingrese la contraseña."
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="confirm">Ingrese de nuevo la contraseña:</label>
+            <input
+              type="password"
+              id="confirm"
+              [(ngModel)]="user.confirPassword"
+              name="confirPassword"
+              class="form-control"
+              placeholder="Ingrese la contrase de nuevo."
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="col-md-12 text-center">
+            <button
+              [disabled]="
+                user.password!.trim().length === 0 &&
+                user.mail!.trim().length === 0
+              "
+              class="btn btn-block mybtn btn-primary tx-tfm"
+            >
+              Registrarse
+            </button>
+          </div>
+
+          <div class="col-md-12">
+            <div class="login-or">
+              <hr class="hr-or" />
+              <span class="span-or">o</span>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <p class="text-center">
+                <a href="#" (click)="goToLogin()">Ya tiene una cuenta?</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="corazon"></div>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+  </div>
+</div>
